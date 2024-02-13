@@ -96,12 +96,13 @@ class Calculate {
         for (Map.Entry<String, Double> product : products.entrySet()) {
             sum += product.getValue();
         }
-        String rubl = switch ((int) sum / persons) {
-            case 1 -> "рубль";
-            case 2, 3, 4 -> "рубля";
+        double moneyOnePerson = sum / persons;
+        String rubChar = String.valueOf(((int) moneyOnePerson));
+        String rubl = switch (rubChar.charAt(rubChar.length() - 1)) {
+            case '1' -> "рубль";
+            case '2', '3', '4' -> "рубля";
             default -> "рублей";
         };
-        double moneyOnePerson = sum / persons;
         System.out.println("Каждый человек должен заплатить: " + String.format("%.2f", moneyOnePerson) + " " + rubl);
     }
 }
