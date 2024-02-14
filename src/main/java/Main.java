@@ -56,7 +56,6 @@ class Calculate {
                     break;
                 }
                 if (price.equalsIgnoreCase("Завершить")) {
-                    System.out.println("!!!!!!!");
                     choice = false;
                     break;
                 }
@@ -97,12 +96,17 @@ class Calculate {
             sum += product.getValue();
         }
         double moneyOnePerson = sum / persons;
-        String rubChar = String.valueOf(((int) moneyOnePerson));
-        String rubl = switch (rubChar.charAt(rubChar.length() - 1)) {
-            case '1' -> "рубль";
-            case '2', '3', '4' -> "рубля";
-            default -> "рублей";
-        };
+        int rubChar = (int) moneyOnePerson % 10;
+        String rubl;
+        if (moneyOnePerson % 100 >= 11 && moneyOnePerson % 100 <= 14) {
+            rubl = "рублей";
+        } else {
+            rubl = switch (rubChar) {
+                case 1 -> " рубль";
+                case 2, 3, 4 -> " рубля";
+                default -> " рублей";
+            };
+        }
         System.out.println("Каждый человек должен заплатить: " + String.format("%.2f", moneyOnePerson) + " " + rubl);
     }
 }
